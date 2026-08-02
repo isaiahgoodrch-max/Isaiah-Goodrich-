@@ -624,16 +624,34 @@
 
 <script>
 (function(){
-  document.querySelectorAll('.tt-facade').forEach(function(f){
+  /* TikTok throttles back-to-back oembed calls, so stagger them and retry
+     on failure. The cover only fades in once the image itself has decoded,
+     otherwise a dead thumbnail URL leaves a half-painted card. */
+  function loadCover(url,cover,attempt){
+    fetch('https://www.tiktok.com/oembed?url='+encodeURIComponent(url))
+      .then(function(r){
+        if(!r.ok) throw new Error(r.status);
+        return r.json();
+      })
+      .then(function(d){
+        if(!d||!d.thumbnail_url) throw new Error('no thumbnail');
+        var img=new Image();
+        img.onload=function(){
+          cover.style.backgroundImage='url("'+d.thumbnail_url+'")';
+          cover.classList.add('loaded');
+        };
+        img.src=d.thumbnail_url;
+      })
+      .catch(function(){
+        if(attempt<2) setTimeout(function(){ loadCover(url,cover,attempt+1); },800*(attempt+1));
+      });
+  }
+
+  document.querySelectorAll('.tt-facade').forEach(function(f,i){
     var id=f.getAttribute('data-id');
     var url=f.getAttribute('data-url');
     var cover=f.querySelector('.tt-cover');
-    try{
-      fetch('https://www.tiktok.com/oembed?url='+encodeURIComponent(url))
-        .then(function(r){return r.json();})
-        .then(function(d){ if(d&&d.thumbnail_url){ cover.style.backgroundImage='url("'+d.thumbnail_url+'")'; cover.classList.add('loaded'); } })
-        .catch(function(){});
-    }catch(e){}
+    setTimeout(function(){ loadCover(url,cover,0); },i*450);
     f.addEventListener('click',function(){
       var wrap=f.closest('.tt');
       var ifr=document.createElement('iframe');
