@@ -241,7 +241,8 @@
   .foot-note{text-align:center;font-size:11px;color:rgba(242,235,227,.6);letter-spacing:1px;margin-top:34px}
 
   /* ---------- TRAVEL ---------- */
-  .feed{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;justify-items:center;align-items:start;margin-top:6px}
+  /* min() keeps the 300px track from becoming a floor wider than the viewport */
+  .feed{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:26px;justify-items:center;align-items:start;margin-top:6px}
   .feed .cell{width:100%;max-width:330px}
   .tt{position:relative;width:100%;max-width:330px;aspect-ratio:9/16;margin:0 auto;border-radius:16px;overflow:hidden;background:#141414;box-shadow:0 12px 30px rgba(60,48,38,.22)}
   .tt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -276,6 +277,20 @@
   @media(max-width:520px){
     .brand-grid{grid-template-columns:repeat(3,1fr)}
     .topbar .wrap{gap:16px}
+    /* Logo wordmarks set a min-content width wider than the grid column, and
+       grid items default to min-width:auto — that pushed the page past the
+       viewport and let it pan sideways. Let them shrink, and scale the type
+       so the marks still sit inside their circles. */
+    .brand,.mk{min-width:0;max-width:100%}
+    .mk span{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+    .gs{font-size:11px}
+    .ghost{font-size:17px}
+    .ghost-sub{font-size:5px;letter-spacing:2.5px}
+    .dfyne{font-size:13px;letter-spacing:1px}
+    .teveo{font-size:11px;letter-spacing:3px;padding-left:3px}
+    .soar{font-size:18px;letter-spacing:3px;padding-left:3px}
+    .ur-1{font-size:9px}
+    .ur-2{font-size:5.5px;letter-spacing:3px;padding-left:3px}
   }
 </style>
 </head>
@@ -377,7 +392,7 @@
 <section class="section band" id="portfolio">
   <div class="wrap">
     <div class="dhead">
-      <span class="a serif">Featured&nbsp;</span><span class="b">Work</span>
+      <span class="a serif">Featured</span> <span class="b">Work</span>
     </div>
     <p class="dsub">Content organized by category. Video slots are ready. Drop each reel in and it links out to the post.</p>
 
@@ -456,7 +471,7 @@
 <section class="section band" id="testimonials">
   <div class="wrap">
     <div class="dhead">
-      <span class="a serif">Client&nbsp;</span><span class="b">Testimonials</span>
+      <span class="a serif">Client</span> <span class="b">Testimonials</span>
     </div>
     <div class="tgrid">
       <div class="tcard">
@@ -486,7 +501,7 @@
 <section class="section">
   <div class="wrap">
     <div class="dhead">
-      <span class="a serif">How it&nbsp;</span><span class="b">Works</span>
+      <span class="a serif">How it</span> <span class="b">Works</span>
     </div>
     <div class="steps">
       <div class="step">
@@ -566,7 +581,7 @@
 <section class="section" id="travel">
   <div class="wrap">
     <div class="dhead">
-      <span class="a serif">Places worth&nbsp;</span><span class="b">Travel</span>
+      <span class="a serif">Places worth</span> <span class="b">Travel</span>
     </div>
     <p class="dsub">From workouts to wanderlust. The stays, destinations, and little moments worth sharing. Authentic travel content that brings a destination to life.</p>
 
