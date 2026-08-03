@@ -118,7 +118,10 @@
     text-align:center;font-weight:700;letter-spacing:3px;font-size:15px;
     text-transform:uppercase;margin-bottom:26px;color:#efe7dd;
   }
-  .brand-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:16px}
+  /* wider container + bigger gap: more air between circles while each one still
+     grows ~5%, which a bigger gap alone would have taken away */
+  .trusted .wrap{max-width:1280px}
+  .brand-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:22px}
   .brand{
     aspect-ratio:1;border-radius:50%;background:#f4efe8;
     display:flex;align-items:center;justify-content:center;text-align:center;
@@ -141,9 +144,13 @@
     background:linear-gradient(to top,rgba(0,0,0,.74) 0%,rgba(0,0,0,.28) 46%,rgba(0,0,0,.04) 100%);
   }
   .brand-name{
-    position:relative;z-index:2;align-self:flex-end;width:100%;
-    padding:0 4px 11px;color:#fff;font-weight:700;
-    font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;
+    position:relative;z-index:2;align-self:flex-end;
+    /* the label sits low in a circle, where the curve is far narrower than the
+       full width — capping it and lifting it clear stops border-radius from
+       clipping the first and last letters of longer names */
+    width:78%;margin:0 auto;padding:0 0 17px;
+    color:#fff;font-weight:700;line-height:1.25;
+    font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;
     text-shadow:0 1px 4px rgba(0,0,0,.75);
   }
   /* product shots frame better centred than the portraits do */
@@ -439,13 +446,16 @@
   @media(max-width:860px){
     .hero-grid,.who-grid,.contact-grid{grid-template-columns:1fr}
     .hero-portrait{order:-1;max-width:340px;margin:0 auto}
-    .brand-grid{grid-template-columns:repeat(4,1fr)}
+    .brand-grid{grid-template-columns:repeat(4,1fr);gap:20px}
+    .trusted .wrap{padding-left:20px;padding-right:20px}
     .tgrid,.steps{grid-template-columns:1fr}
     .rs-grid{grid-template-columns:1fr}
     .who-portrait{max-width:360px;margin:0 auto}
   }
   @media(max-width:520px){
-    .brand-grid{grid-template-columns:repeat(3,1fr)}
+    .brand-grid{grid-template-columns:repeat(3,1fr);gap:18px}
+    .trusted .wrap{padding-left:16px;padding-right:16px}
+    .brand-name{font-size:10px;letter-spacing:.4px;padding-bottom:14px}
     .topbar .wrap{gap:16px}
     /* Logo wordmarks set a min-content width wider than the grid column, and
        grid items default to min-width:auto — that pushed the page past the
