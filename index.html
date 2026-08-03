@@ -148,6 +148,16 @@
   }
   /* product shots frame better centred than the portraits do */
   .brand.has-photo.product img{object-position:center center}
+  /* circles link out to Mandi's own affiliate pages */
+  a.brand{text-decoration:none;transition:transform .2s,box-shadow .2s}
+  a.brand:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.34)}
+  a.brand:hover img{transform:scale(.96)}
+  a.brand img{transition:transform .25s}
+  a.brand:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+  @media(prefers-reduced-motion:reduce){
+    a.brand,a.brand img{transition:none}
+    a.brand:hover{transform:none}
+  }
   .brand.empty{background:rgba(244,239,232,.12);border:1.5px dashed rgba(244,239,232,.4);box-shadow:none}
   .brand.empty span{color:var(--pink-soft);font-weight:500;font-size:20px}
   .trusted .note{text-align:center;margin-top:20px;font-size:12px;letter-spacing:1px;color:rgba(239,231,221,.7)}
@@ -528,30 +538,30 @@
   <div class="wrap">
     <h2>Trusted by brands including</h2>
     <div class="brand-grid">
-      <div class="brand has-photo">
+      <a class="brand has-photo" href="https://www.gymshark.com/" target="_blank" rel="noopener sponsored">
         <img src="images/gymshark-sm.jpg" alt="Mandi Bagley wearing Gymshark" width="429" height="500" decoding="async">
         <span class="brand-name">Gymshark</span>
-      </div>
-      <div class="brand has-photo product">
+      </a>
+      <a class="brand has-photo product" href="https://www.ghostlifestyle.com/MANDI" target="_blank" rel="noopener sponsored">
         <img src="images/ghost-sm.jpg" alt="Ghost Lifestyle whey protein" width="500" height="326" decoding="async">
         <span class="brand-name">Ghost</span>
-      </div>
-      <div class="brand has-photo">
+      </a>
+      <a class="brand has-photo" href="https://us.dfyne.com/?sca_ref=7958945.biq58MSLA8" target="_blank" rel="noopener sponsored">
         <img src="images/dfyne-sm.jpg" alt="Mandi Bagley wearing DFYNE" width="281" height="500" decoding="async">
         <span class="brand-name">DFYNE</span>
-      </div>
-      <div class="brand has-photo">
+      </a>
+      <a class="brand has-photo" href="https://teveo.com/en-us" target="_blank" rel="noopener sponsored">
         <img src="images/teveo-sm.jpg" alt="Mandi Bagley wearing TEVEO" width="333" height="500" decoding="async">
         <span class="brand-name">TEVEO</span>
-      </div>
-      <div class="brand has-photo">
+      </a>
+      <a class="brand has-photo" href="https://soarbars.com/products/the-creatine-protein-bar-mandi" target="_blank" rel="noopener sponsored">
         <img src="images/soar-sm.jpg" alt="Mandi Bagley with a Soar creatine protein bar" width="400" height="500" decoding="async">
         <span class="brand-name">SOAR</span>
-      </div>
-      <div class="brand has-photo product">
+      </a>
+      <a class="brand has-photo product" href="https://urbanrootsfarms.com/mandi" target="_blank" rel="noopener sponsored">
         <img src="images/urbanroots-sm.jpg" alt="Urban Roots Farms TrueMicro jar with microgreens and berries" width="500" height="373" decoding="async">
         <span class="brand-name">Urban Roots</span>
-      </div>
+      </a>
       <div class="brand empty"><span>+</span></div>
       <div class="brand empty"><span>+</span></div>
     </div>
