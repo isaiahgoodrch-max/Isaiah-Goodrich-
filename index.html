@@ -131,6 +131,10 @@
   .brand.has-photo img{
     position:absolute;inset:0;width:100%;height:100%;
     object-fit:cover;object-position:center 30%;
+    /* cover already scales to the minimum that fills the circle, so pulling
+       back 10% to show more of the shot leaves a ring of the dark circle
+       behind it, which reads as a frame */
+    transform:scale(.9);
   }
   .brand.has-photo::after{
     content:"";position:absolute;inset:0;
