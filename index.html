@@ -256,6 +256,25 @@
   .tcard .name{font-weight:700;color:var(--brown-deep);font-size:15px}
   .tcard .prog{font-size:12px;color:var(--pink-deep);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
   .stars{color:#e0a83c;font-size:15px;letter-spacing:2px;margin-bottom:10px}
+  .t-empty{
+    background:#fff;border-radius:14px;padding:34px 26px;text-align:center;
+    box-shadow:0 10px 26px rgba(60,48,38,.1);border-top:3px solid var(--pink);
+    max-width:560px;margin:0 auto;
+  }
+  .t-empty svg{width:34px;height:34px;fill:var(--pink);opacity:.55}
+  .t-empty p{font-size:14px;color:var(--muted);margin:10px 0 18px}
+  .t-open{
+    background:var(--pink-deep);color:#fff;border:0;border-radius:30px;padding:12px 26px;
+    font-family:inherit;font-weight:700;font-size:14px;letter-spacing:.5px;cursor:pointer;
+    transition:background .18s,transform .18s;
+  }
+  .t-open:hover{background:#9d3d5b;transform:translateY(-1px)}
+  .t-open:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+  .inq select{
+    width:100%;font-family:inherit;font-size:14px;color:var(--text);background:#fdfaf8;
+    border:1.5px solid #e6d5da;border-radius:9px;padding:10px 12px;
+  }
+  .inq select:focus{outline:none;border-color:var(--pink-deep);box-shadow:0 0 0 3px rgba(182,74,106,.16)}
   .tcard p{font-size:14px;color:var(--text);line-height:1.6}
 
   /* ---------- HOW IT WORKS ---------- */
@@ -406,6 +425,7 @@
     color:var(--brown-deep);margin-bottom:5px;
   }
   .inq .req{color:var(--pink-deep)}
+  .inq .opt{color:var(--muted);font-weight:500;text-transform:none;letter-spacing:0}
   .inq input,.inq textarea{
     width:100%;font-family:inherit;font-size:14px;color:var(--text);background:#fdfaf8;
     border:1.5px solid #e6d5da;border-radius:9px;padding:10px 12px;
@@ -681,26 +701,14 @@
     <div class="dhead">
       <span class="a serif">Client</span> <span class="b">Testimonials</span>
     </div>
-    <div class="tgrid">
-      <div class="tcard">
-        <div class="name">Sarah M.</div>
-        <div class="prog">Reset &amp; Rebuild</div>
-        <div class="stars">★★★★★</div>
-        <p>"Reset &amp; Rebuild genuinely changed how I approach my fitness. I lost 8 lbs and feel stronger than ever."</p>
-      </div>
-      <div class="tcard">
-        <div class="name">Jessica R.</div>
-        <div class="prog">Reset &amp; Rebuild</div>
-        <div class="stars">★★★★★</div>
-        <p>"Best $40 I've ever spent. The workouts are challenging but totally doable. I've done 3 rounds already."</p>
-      </div>
-      <div class="tcard">
-        <div class="name">Taylor K.</div>
-        <div class="prog">Lock In &amp; Level Up</div>
-        <div class="stars">★★★★★</div>
-        <p>"Lock In &amp; Level Up pushed me harder than I expected. I could see results by week 3."</p>
-      </div>
+    <p class="dsub">Worked with Mandi? Share how the partnership went — reviewed before it goes live here.</p>
+
+    <div class="t-empty">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2Zm3 6h10v2H7v-2Zm0-3h10v2H7V7Z"/></svg>
+      <p>Brand testimonials will appear here as they come in.</p>
+      <button type="button" class="t-open">Leave a testimonial</button>
     </div>
+
     <p class="dsub" style="margin-top:26px">4.98★ average across 53 five-star reviews on my fitness programs.</p>
   </div>
 </section>
@@ -852,6 +860,67 @@
   });
 })();
 </script>
+
+<!-- TESTIMONIAL MODAL -->
+<dialog class="inq-dialog" id="tstDialog" aria-labelledby="tstTitle">
+  <div class="inq">
+    <button class="inq-x" type="button" id="tstClose" aria-label="Close">&times;</button>
+    <h3 id="tstTitle">Leave a testimonial</h3>
+    <p class="intro">Tell us how working with Mandi went. Testimonials are reviewed before they appear on this page.</p>
+
+    <form id="tstForm" novalidate>
+      <div class="field">
+        <label for="tstName">Your name <span class="req">*</span></label>
+        <input id="tstName" type="text" autocomplete="name">
+        <div class="err">Please add your name.</div>
+      </div>
+      <div class="field">
+        <label for="tstEmail">Your email <span class="req">*</span></label>
+        <input id="tstEmail" type="email" autocomplete="email">
+        <div class="err">Please add a valid email so we can verify the testimonial.</div>
+      </div>
+      <div class="field">
+        <label for="tstBrand">Brand / company <span class="req">*</span></label>
+        <input id="tstBrand" type="text" autocomplete="organization">
+        <div class="err">Please add the brand you represent.</div>
+      </div>
+      <div class="field">
+        <label for="tstRole">Your role <span class="opt">(optional)</span></label>
+        <input id="tstRole" type="text" placeholder="e.g. Marketing Manager">
+      </div>
+      <div class="field">
+        <label for="tstRating">Rating <span class="req">*</span></label>
+        <select id="tstRating">
+          <option value="">Choose a rating</option>
+          <option value="5">★★★★★ &nbsp;Excellent</option>
+          <option value="4">★★★★ &nbsp;Very good</option>
+          <option value="3">★★★ &nbsp;Good</option>
+          <option value="2">★★ &nbsp;Fair</option>
+          <option value="1">★ &nbsp;Poor</option>
+        </select>
+        <div class="err">Please choose a rating.</div>
+      </div>
+      <div class="field">
+        <label for="tstText">Your testimonial <span class="req">*</span></label>
+        <textarea id="tstText" maxlength="1200" placeholder="What was the collaboration like? What results did you see?"></textarea>
+        <div class="err">Please write a short testimonial.</div>
+      </div>
+
+      <div class="inq-actions">
+        <button class="inq-send" type="submit">Send testimonial</button>
+        <button class="inq-cancel" type="button" id="tstCancel">Cancel</button>
+      </div>
+    </form>
+
+    <div class="inq-fallback" id="tstFallback">
+      <strong>Didn't your email app open?</strong> Copy your testimonial and send it to
+      <a href="mailto:bagleyamanda95@gmail.com">bagleyamanda95@gmail.com</a>.
+      <br><button class="inq-copy" type="button" id="tstCopy">Copy testimonial</button>
+    </div>
+
+    <p class="inq-note">This opens your email app with your testimonial filled in. Nothing is published automatically — Mandi reviews each one before it appears on the site.</p>
+  </div>
+</dialog>
 
 <!-- BRAND INQUIRY MODAL -->
 <dialog class="inq-dialog" id="inqDialog" aria-labelledby="inqTitle">
@@ -1034,6 +1103,106 @@
       try{ document.execCommand('copy'); done(); }catch(err){ btn.textContent = 'Press Cmd+C'; }
       document.body.removeChild(ta);
     }
+  });
+})();
+</script>
+
+<script>
+/* testimonial submissions */
+(function(){
+  /* Two recipients so the testimonial reaches Mandi and Isaiah for review
+     before anything is published on the page. */
+  var TO = 'bagleyamanda95@gmail.com,isaiahgoodrch@gmail.com';
+  var dlg      = document.getElementById('tstDialog');
+  var form     = document.getElementById('tstForm');
+  var fallback = document.getElementById('tstFallback');
+  var openers  = document.querySelectorAll('.t-open');
+  if(!dlg || !form || !openers.length || typeof dlg.showModal !== 'function'){
+    openers.forEach(function(t){
+      t.addEventListener('click', function(){ window.location.href = 'mailto:' + TO; });
+    });
+    return;
+  }
+
+  var fields = [
+    {el: document.getElementById('tstName'),   label: 'Name'},
+    {el: document.getElementById('tstEmail'),  label: 'Email', email: true},
+    {el: document.getElementById('tstBrand'),  label: 'Brand'},
+    {el: document.getElementById('tstRole'),   label: 'Role', optional: true},
+    {el: document.getElementById('tstRating'), label: 'Rating'},
+    {el: document.getElementById('tstText'),   label: 'Testimonial'}
+  ];
+  var lastBody = '';
+
+  function valid(f){
+    var v = f.el.value.trim();
+    if(f.optional) return true;
+    if(!v) return false;
+    if(f.email) return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    return true;
+  }
+  function markInvalid(f, bad){
+    var wrap = f.el.closest('.field');
+    if(wrap) wrap.classList.toggle('invalid', bad);
+  }
+
+  openers.forEach(function(t){
+    t.addEventListener('click', function(e){
+      e.preventDefault();
+      dlg.showModal();
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  document.getElementById('tstClose').addEventListener('click', function(){ dlg.close(); });
+  document.getElementById('tstCancel').addEventListener('click', function(){ dlg.close(); });
+  dlg.addEventListener('click', function(e){ if(e.target === dlg) dlg.close(); });
+  dlg.addEventListener('close', function(){
+    document.body.style.overflow = '';
+    fallback.classList.remove('show');
+  });
+
+  fields.forEach(function(f){
+    f.el.addEventListener('input', function(){
+      var wrap = f.el.closest('.field');
+      if(wrap && wrap.classList.contains('invalid')) markInvalid(f, !valid(f));
+    });
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var firstBad = null;
+    fields.forEach(function(f){
+      var ok = valid(f);
+      markInvalid(f, !ok);
+      if(!ok && !firstBad) firstBad = f.el;
+    });
+    if(firstBad){ firstBad.focus(); return; }
+
+    var v = fields.map(function(f){ return f.el.value.trim(); });
+    var stars = v[4] ? new Array(parseInt(v[4],10)+1).join('*') : '';
+    var subject = 'Testimonial for Mandi - ' + v[2];
+    lastBody =
+      'Name: '   + v[0] + '\n' +
+      'Email: '  + v[1] + '\n' +
+      'Brand: '  + v[2] + '\n' +
+      'Role: '   + (v[3] || '-') + '\n' +
+      'Rating: ' + v[4] + '/5 ' + stars + '\n\n' +
+      'Testimonial:\n' + v[5] + '\n';
+
+    window.location.href = 'mailto:' + TO +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body='    + encodeURIComponent(lastBody);
+
+    setTimeout(function(){ fallback.classList.add('show'); }, 700);
+  });
+
+  document.getElementById('tstCopy').addEventListener('click', function(){
+    var btn = this;
+    var text = 'To: ' + TO + '\n\n' + lastBody;
+    function done(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy testimonial'; }, 2000); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, function(){ done(); });
+    } else { done(); }
   });
 })();
 </script>
