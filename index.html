@@ -120,7 +120,7 @@
   }
   /* wider container + bigger gap: more air between circles while each one still
      grows ~5%, which a bigger gap alone would have taken away */
-  .trusted .wrap{max-width:1280px}
+  .trusted .wrap{max-width:1500px}
   .brand-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
   .brand{flex:0 0 calc((100% - 110px)/6)}   /* 6 per row, 5 gaps of 22px */
   .brand{
@@ -145,15 +145,13 @@
     /* the label sits low in a circle, where the curve is far narrower than the
        full width — capping it and lifting it clear stops border-radius from
        clipping the first and last letters of longer names */
-    width:78%;margin:0 auto;padding:0 0 21px;
+    width:74%;margin:0 auto;padding:0 0 22px;
     color:#fff;font-weight:700;line-height:1.25;
     font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;
     text-shadow:0 1px 4px rgba(0,0,0,.75);
   }
-  /* longest name — trimmed so it keeps clearance even on a fallback font */
-  .brand-name.long{width:74%;font-size:10.5px;letter-spacing:.4px}
   /* product shots frame better centred than the portraits do */
-  .brand.has-photo.product img{object-position:center center}
+  .brand.has-photo.product img{object-position:center 42%}
   /* circles link out to Mandi's own affiliate pages */
   a.brand{text-decoration:none;transition:transform .2s,box-shadow .2s}
   a.brand:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.34)}
@@ -571,7 +569,7 @@
       </a>
       <a class="brand has-photo product" href="https://urbanrootsfarms.com/mandi" target="_blank" rel="noopener sponsored">
         <img src="images/urbanroots-sm.jpg" alt="Urban Roots Farms TrueMicro jar with microgreens and berries" width="500" height="373" decoding="async">
-        <span class="brand-name long">Urban Roots</span>
+        <span class="brand-name">Urban Roots</span>
       </a>
       <div class="brand empty"><span>+</span></div>
       <div class="brand empty"><span>+</span></div>
