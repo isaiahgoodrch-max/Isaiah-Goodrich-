@@ -636,7 +636,7 @@
       <div class="reel">
         <div class="tt">
           <a class="tt-ext" href="https://www.tiktok.com/@mandipandeee/video/7668724292485483806" target="_blank" rel="noopener" title="Open on TikTok"><svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3ZM5 5h5v2H7v10h10v-3h2v5H5V5Z"/></svg></a>
-          <button class="tt-facade" data-id="7668724292485483806" data-url="https://www.tiktok.com/@mandipandeee/video/7668724292485483806">
+          <button class="tt-facade" data-id="7668724292485483806" data-url="https://www.tiktok.com/@mandipandeee/video/7668724292485483806" data-cover="images/travel-1.jpg">
             <div class="tt-cover"></div>
             <div class="tt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div>
             <div class="tt-tag">@mandipandeee</div>
@@ -818,41 +818,33 @@
 
 <script>
 (function(){
-  /* TikTok throttles back-to-back oembed calls, so stagger them and retry
-     on failure. The cover only fades in once the image itself has decoded,
-     otherwise a dead thumbnail URL leaves a half-painted card. */
-  function loadCover(url,cover,attempt){
-    fetch('https://www.tiktok.com/oembed?url='+encodeURIComponent(url))
-      .then(function(r){
-        if(!r.ok) throw new Error(r.status);
-        return r.json();
-      })
-      .then(function(d){
-        /* TikTok returns 200 with thumbnail_url:"" for some videos. That is
-           permanent, not transient — fall back to the styled cover instead
-           of spending retries on it. */
-        if(!d||!d.thumbnail_url){ cover.closest('.tt-facade').classList.add('no-cover'); return; }
-        var img=new Image();
-        img.onload=function(){
-          cover.style.backgroundImage='url("'+d.thumbnail_url+'")';
-          cover.classList.add('loaded');
-        };
-        img.src=d.thumbnail_url;
-      })
-      .catch(function(){
-        if(attempt<2) setTimeout(function(){ loadCover(url,cover,attempt+1); },800*(attempt+1));
-      });
-  }
-
-  document.querySelectorAll('.tt-facade').forEach(function(f,i){
+  /* Covers are self-hosted from data-cover rather than fetched from TikTok's
+     oembed at runtime: those URLs are signed and expire, and the endpoint
+     throttles back-to-back calls. A card with no cover keeps the branded
+     gradient fallback. */
+  document.querySelectorAll('.tt-facade').forEach(function(f){
     var id=f.getAttribute('data-id');
     var url=f.getAttribute('data-url');
+    var src=f.getAttribute('data-cover');
     var cover=f.querySelector('.tt-cover');
-    setTimeout(function(){ loadCover(url,cover,0); },i*450);
+    if(src){
+      var img=new Image();
+      img.onload=function(){
+        cover.style.backgroundImage='url("'+src+'")';
+        cover.classList.add('loaded');
+      };
+      img.onerror=function(){ f.classList.add('no-cover'); };
+      img.src=src;
+    } else {
+      f.classList.add('no-cover');
+    }
+
     f.addEventListener('click',function(){
       var wrap=f.closest('.tt');
       var ifr=document.createElement('iframe');
-      ifr.src='https://www.tiktok.com/embed/v2/'+id;
+      /* player/v1 rather than embed/v2: it takes rel=0, which stops TikTok
+         showing other people's videos when this one is paused or scrolled */
+      ifr.src='https://www.tiktok.com/player/v1/'+id+'?rel=0&description=0&music_info=0&controls=1&autoplay=1';
       ifr.title='TikTok video';
       ifr.setAttribute('allow','autoplay; encrypted-media; fullscreen; picture-in-picture');
       ifr.setAttribute('allowfullscreen','');
