@@ -124,6 +124,26 @@
     display:flex;align-items:center;justify-content:center;text-align:center;
     padding:8px;box-shadow:0 4px 12px rgba(0,0,0,.18);
   }
+  /* photo-filled brand circles. Uses <img> rather than background-image so the
+     browser applies EXIF orientation — teveo.jpg is stored landscape with a
+     rotation flag and renders sideways as a CSS background. */
+  .brand.has-photo{position:relative;overflow:hidden;padding:0;background:#2a2320}
+  .brand.has-photo img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 30%;
+  }
+  .brand.has-photo::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(0,0,0,.74) 0%,rgba(0,0,0,.28) 46%,rgba(0,0,0,.04) 100%);
+  }
+  .brand-name{
+    position:relative;z-index:2;align-self:flex-end;width:100%;
+    padding:0 4px 11px;color:#fff;font-weight:700;
+    font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;
+    text-shadow:0 1px 4px rgba(0,0,0,.75);
+  }
+  /* product shots frame better centred than the portraits do */
+  .brand.has-photo.product img{object-position:center center}
   .brand.empty{background:rgba(244,239,232,.12);border:1.5px dashed rgba(244,239,232,.4);box-shadow:none}
   .brand.empty span{color:var(--pink-soft);font-weight:500;font-size:20px}
   .trusted .note{text-align:center;margin-top:20px;font-size:12px;letter-spacing:1px;color:rgba(239,231,221,.7)}
@@ -488,31 +508,34 @@
   <div class="wrap">
     <h2>Trusted by brands including</h2>
     <div class="brand-grid">
-      <div class="brand"><div class="mk">
-        <span class="gs">GYMSHARK</span>
-      </div></div>
-      <div class="brand"><div class="mk">
-        <span class="ghost">GHOST</span>
-        <span class="ghost-sub">LIFESTYLE</span>
-      </div></div>
-      <div class="brand"><div class="mk">
-        <span class="dfyne">DFYNE</span>
-      </div></div>
-      <div class="brand"><div class="mk">
-        <span class="teveo">TEVEO</span>
-      </div></div>
-      <div class="brand"><div class="mk">
-        <span class="soar">SOAR</span>
-      </div></div>
-      <div class="brand"><div class="mk ur">
-        <svg class="leaf" viewBox="0 0 24 24" width="20"><path d="M20 4C10 4 4 10 4 19c0 .4 0 .7.1 1 6-1 10-4 12-9-3 4-7 6-11 6.5C6 11 12 6 20 4Z"/></svg>
-        <span class="ur-1">Urban Roots</span>
-        <span class="ur-2">FARMS</span>
-      </div></div>
+      <div class="brand has-photo">
+        <img src="images/gymshark.jpg" alt="Mandi Bagley wearing Gymshark" width="1203" height="1400" loading="lazy" decoding="async">
+        <span class="brand-name">Gymshark</span>
+      </div>
+      <div class="brand has-photo product">
+        <img src="images/ghost.png" alt="Ghost Lifestyle whey protein" width="606" height="396" loading="lazy" decoding="async">
+        <span class="brand-name">Ghost</span>
+      </div>
+      <div class="brand has-photo">
+        <img src="images/dfyne.jpg" alt="Mandi Bagley wearing DFYNE" width="787" height="1400" loading="lazy" decoding="async">
+        <span class="brand-name">DFYNE</span>
+      </div>
+      <div class="brand has-photo">
+        <img src="images/teveo.jpg" alt="Mandi Bagley wearing TEVEO" width="933" height="1400" loading="lazy" decoding="async">
+        <span class="brand-name">TEVEO</span>
+      </div>
+      <div class="brand has-photo">
+        <img src="images/soar.jpg" alt="Mandi Bagley with a Soar creatine protein bar" width="1200" height="1500" loading="lazy" decoding="async">
+        <span class="brand-name">SOAR</span>
+      </div>
+      <div class="brand has-photo product">
+        <img src="images/urbanroots.jpg" alt="Urban Roots Farms TrueMicro jar with microgreens and berries" width="1200" height="896" loading="lazy" decoding="async">
+        <span class="brand-name">Urban Roots</span>
+      </div>
       <div class="brand empty"><span>+</span></div>
       <div class="brand empty"><span>+</span></div>
     </div>
-    <p class="note">Swap each circle for the brand logo · add more as partnerships grow</p>
+    <p class="note">Add more circles as partnerships grow</p>
   </div>
 </section>
 
