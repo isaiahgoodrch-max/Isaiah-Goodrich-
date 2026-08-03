@@ -278,15 +278,15 @@
   /* The hide is a CSS animation with fill:forwards, so the overlay clears
      itself even if the script never runs. JS only removes the node and
      unlocks scrolling afterwards. */
-  .intro{
+  .site-intro{
     position:fixed;inset:0;z-index:200;
     display:flex;align-items:center;justify-content:center;padding:24px;
     background:linear-gradient(160deg,#ffffff 0%,#fdf4f5 52%,#f6e3e7 100%);
     animation:introOut .65s ease 1.95s forwards;
   }
   @keyframes introOut{to{opacity:0;visibility:hidden}}
-  .intro-inner{display:inline-block;text-align:left;max-width:100%}
-  .intro-name{
+  .site-intro-inner{display:inline-block;text-align:left;max-width:100%}
+  .site-intro-name{
     white-space:nowrap;line-height:1;
     font-size:clamp(38px,9vw,104px);
     clip-path:inset(0 100% 0 0);
@@ -294,9 +294,9 @@
     animation:introWipe 1s cubic-bezier(.22,.68,.2,1) .12s forwards;
   }
   @keyframes introWipe{to{clip-path:inset(0 0 0 0);transform:none}}
-  .intro-name .a{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:var(--brown-deep)}
-  .intro-name .b{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:var(--pink-deep)}
-  .intro-rule{
+  .site-intro-name .a{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:var(--brown-deep)}
+  .site-intro-name .b{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:var(--pink-deep)}
+  .site-intro-rule{
     height:4px;border-radius:3px;margin-top:16px;
     background:linear-gradient(90deg,var(--brown) 0%,var(--pink-deep) 100%);
     transform:scaleX(0);transform-origin:left center;
@@ -305,7 +305,7 @@
   @keyframes introRule{to{transform:scaleX(1)}}
   /* motion-sensitive visitors get no animation and no overlay at all */
   @media(prefers-reduced-motion:reduce){
-    .intro{display:none}
+    .site-intro{display:none}
   }
 
   /* ---------- INQUIRY MODAL ---------- */
@@ -408,10 +408,10 @@
 <body>
 
 <!-- INTRO -->
-<div class="intro" id="intro" aria-hidden="true">
-  <div class="intro-inner">
-    <div class="intro-name"><span class="a">Mandi</span> <span class="b">Bagley</span></div>
-    <div class="intro-rule"></div>
+<div class="site-intro" id="intro" aria-hidden="true">
+  <div class="site-intro-inner">
+    <div class="site-intro-name"><span class="a">Mandi</span> <span class="b">Bagley</span></div>
+    <div class="site-intro-rule"></div>
   </div>
 </div>
 
