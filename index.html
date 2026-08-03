@@ -145,7 +145,8 @@
   section[id]{scroll-margin-top:64px}
   .band{background:var(--blush)}
   .dhead{text-align:center;margin-bottom:8px;line-height:.9}
-  .dhead .a{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:clamp(34px,5vw,58px);color:var(--brown-deep)}
+  /* margin rather than a literal space: survives the line wrap and scales with the type */
+  .dhead .a{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:clamp(34px,5vw,58px);color:var(--brown-deep);margin-right:.14em}
   .dhead .b{font-family:'Anton',sans-serif;font-size:clamp(38px,5.6vw,66px);color:var(--pink-deep);text-transform:uppercase;letter-spacing:1px}
   .dsub{text-align:center;color:var(--muted);font-size:14px;max-width:620px;margin:0 auto 30px;letter-spacing:.3px}
 
