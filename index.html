@@ -148,11 +148,13 @@
     /* the label sits low in a circle, where the curve is far narrower than the
        full width — capping it and lifting it clear stops border-radius from
        clipping the first and last letters of longer names */
-    width:78%;margin:0 auto;padding:0 0 17px;
+    width:78%;margin:0 auto;padding:0 0 21px;
     color:#fff;font-weight:700;line-height:1.25;
     font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;
     text-shadow:0 1px 4px rgba(0,0,0,.75);
   }
+  /* longest name — trimmed so it keeps clearance even on a fallback font */
+  .brand-name.long{font-size:9.5px;letter-spacing:.3px}
   /* product shots frame better centred than the portraits do */
   .brand.has-photo.product img{object-position:center center}
   /* circles link out to Mandi's own affiliate pages */
@@ -570,7 +572,7 @@
       </a>
       <a class="brand has-photo product" href="https://urbanrootsfarms.com/mandi" target="_blank" rel="noopener sponsored">
         <img src="images/urbanroots-sm.jpg" alt="Urban Roots Farms TrueMicro jar with microgreens and berries" width="500" height="373" decoding="async">
-        <span class="brand-name">Urban Roots</span>
+        <span class="brand-name long">Urban Roots</span>
       </a>
       <div class="brand empty"><span>+</span></div>
       <div class="brand empty"><span>+</span></div>
