@@ -274,6 +274,40 @@
   .slot .play svg{width:22px;height:22px;fill:#fff;margin-left:3px}
   .slot .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
 
+  /* ---------- INTRO ---------- */
+  /* The hide is a CSS animation with fill:forwards, so the overlay clears
+     itself even if the script never runs. JS only removes the node and
+     unlocks scrolling afterwards. */
+  .intro{
+    position:fixed;inset:0;z-index:200;
+    display:flex;align-items:center;justify-content:center;padding:24px;
+    background:linear-gradient(160deg,#ffffff 0%,#fdf4f5 52%,#f6e3e7 100%);
+    animation:introOut .65s ease 1.95s forwards;
+  }
+  @keyframes introOut{to{opacity:0;visibility:hidden}}
+  .intro-inner{display:inline-block;text-align:left;max-width:100%}
+  .intro-name{
+    white-space:nowrap;line-height:1;
+    font-size:clamp(38px,9vw,104px);
+    clip-path:inset(0 100% 0 0);
+    transform:translateX(-18px);
+    animation:introWipe 1s cubic-bezier(.22,.68,.2,1) .12s forwards;
+  }
+  @keyframes introWipe{to{clip-path:inset(0 0 0 0);transform:none}}
+  .intro-name .a{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:var(--brown-deep)}
+  .intro-name .b{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:var(--pink-deep)}
+  .intro-rule{
+    height:4px;border-radius:3px;margin-top:16px;
+    background:linear-gradient(90deg,var(--brown) 0%,var(--pink-deep) 100%);
+    transform:scaleX(0);transform-origin:left center;
+    animation:introRule .9s cubic-bezier(.3,.75,.2,1) .5s forwards;
+  }
+  @keyframes introRule{to{transform:scaleX(1)}}
+  /* motion-sensitive visitors get no animation and no overlay at all */
+  @media(prefers-reduced-motion:reduce){
+    .intro{display:none}
+  }
+
   /* ---------- INQUIRY MODAL ---------- */
   /* native <dialog>: display:none and fully inert until showModal() is called,
      so it can never appear on load the way an opacity-hidden overlay can */
@@ -372,6 +406,14 @@
 </style>
 </head>
 <body>
+
+<!-- INTRO -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-inner">
+    <div class="intro-name"><span class="a">Mandi</span> <span class="b">Bagley</span></div>
+    <div class="intro-rule"></div>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav class="topbar">
@@ -818,6 +860,34 @@
 </dialog>
 
 <script>
+/* intro overlay */
+(function(){
+  var intro = document.getElementById('intro');
+  if(!intro) return;
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches){
+    intro.remove();
+    return;
+  }
+  var html = document.documentElement;
+  var prev = html.style.overflow;
+  html.style.overflow = 'hidden';
+  var cleared = false;
+  function clear(){
+    if(cleared) return;
+    cleared = true;
+    html.style.overflow = prev;
+    if(intro.parentNode) intro.parentNode.removeChild(intro);
+  }
+  // backstop well past the 2.6s animation in case animationend never fires
+  var timer = setTimeout(clear, 3200);
+  intro.addEventListener('animationend', function(e){
+    if(e.animationName === 'introOut'){ clearTimeout(timer); clear(); }
+  });
+  // let people skip straight past it
+  intro.addEventListener('click', function(){ clearTimeout(timer); clear(); });
+})();
+
+/* brand inquiry dialog */
 (function(){
   var TO = 'bagleyamanda95@gmail.com';
   var dlg      = document.getElementById('inqDialog');
