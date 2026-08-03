@@ -292,6 +292,12 @@
   .contact-grid .em{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:600}
   .contact-grid .em svg{width:20px;height:20px;fill:#e7ddd1}
   .contact-grid .em a{color:#fff;text-decoration:none}
+  .contact-grid .em button{
+    font-family:inherit;font-size:inherit;font-weight:inherit;line-height:inherit;
+    color:#fff;background:none;border:0;padding:0;cursor:pointer;text-align:left;
+  }
+  .contact-grid .em button:hover{text-decoration:underline}
+  .contact-grid .em button:focus-visible{outline:2px solid var(--pink-soft);outline-offset:3px;border-radius:2px}
   .sign{font-family:'Playfair Display',serif;font-style:italic;font-size:34px;color:var(--pink-soft);margin-top:22px}
   .contact-sec .socials a{background:#2c2621}
   .foot-note{text-align:center;font-size:11px;color:rgba(242,235,227,.6);letter-spacing:1px;margin-top:34px}
@@ -433,7 +439,8 @@
     padding:8px 16px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;
   }
   .inq-copy:hover{background:var(--brown-deep)}
-  /* the trigger stays an anchor so it still works as mailto without JS */
+  /* buttons, not mailto links — an href="mailto:" makes the browser show its
+     "Open Mail?" handler prompt before the dialog can open */
   .mediakit a{cursor:pointer}
   @media(prefers-reduced-motion:reduce){
     .inq-dialog[open] .inq{animation:none}
@@ -526,12 +533,8 @@
         <svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4Zm2 2v.4l8 5 8-5V6H4Zm16 2.9-8 5-8-5V18h16V8.9Z"/></svg>
         <a href="mailto:bagleyamanda95@gmail.com">bagleyamanda95@gmail.com</a>
       </div>
-      <div class="contact-line">
-        <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.5 2.5 0 0 1 12 11.5Z"/></svg>
-        <span>[ Add your location ]</span>
-      </div>
 
-      <p class="mediakit">For brand partnerships &amp; media kit, <button type="button" id="inqTrigger">click here</button></p>
+      <p class="mediakit">For brand partnerships &amp; media kit, <button type="button" class="inq-open" id="inqTrigger">click here</button></p>
     </div>
 
     <div class="ph hero-portrait">
@@ -799,7 +802,7 @@
       <p class="say">Let's work together!</p>
       <div class="em">
         <svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4Zm2 2v.4l8 5 8-5V6H4Zm16 2.9-8 5-8-5V18h16V8.9Z"/></svg>
-        <a href="mailto:bagleyamanda95@gmail.com">bagleyamanda95@gmail.com</a>
+        <button type="button" class="inq-open">bagleyamanda95@gmail.com</button>
       </div>
       <div class="sign">Mandi Bagley</div>
       <div class="socials" style="margin-top:18px">
@@ -943,17 +946,15 @@
 (function(){
   var TO = 'bagleyamanda95@gmail.com';
   var dlg      = document.getElementById('inqDialog');
-  var trigger  = document.getElementById('inqTrigger');
+  var triggers = document.querySelectorAll('.inq-open');
   var form     = document.getElementById('inqForm');
   var fallback = document.getElementById('inqFallback');
-  // The trigger is a button, so if the dialog can't run there is nothing to
-  // fall back to — wire it straight to mailto so it is never a dead control.
-  if(!dlg || !trigger || !form || typeof dlg.showModal !== 'function'){
-    if(trigger){
-      trigger.addEventListener('click', function(){
-        window.location.href = 'mailto:' + TO;
-      });
-    }
+  // The triggers are buttons, so if the dialog can't run there is nothing to
+  // fall back to — wire them straight to mailto so none is ever a dead control.
+  if(!dlg || !triggers.length || !form || typeof dlg.showModal !== 'function'){
+    triggers.forEach(function(t){
+      t.addEventListener('click', function(){ window.location.href = 'mailto:' + TO; });
+    });
     return;
   }
 
@@ -972,10 +973,12 @@
 
   // showModal() gives focus containment, Escape-to-close, an inert page behind
   // and ::backdrop for free — no hand-rolled focus trap needed
-  trigger.addEventListener('click', function(e){
-    e.preventDefault();
-    dlg.showModal();
-    document.body.style.overflow = 'hidden';
+  triggers.forEach(function(t){
+    t.addEventListener('click', function(e){
+      e.preventDefault();
+      dlg.showModal();
+      document.body.style.overflow = 'hidden';
+    });
   });
   document.getElementById('inqClose').addEventListener('click', function(){ dlg.close(); });
   document.getElementById('inqCancel').addEventListener('click', function(){ dlg.close(); });
