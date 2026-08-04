@@ -325,6 +325,14 @@
   }
   .t-open:hover{background:#9d3d5b;transform:translateY(-1px)}
   .t-open:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+  .tst-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .tst-status{display:none;margin-top:16px;padding:14px 16px;border-radius:10px;font-size:13.5px;line-height:1.6}
+  .tst-status.show{display:block}
+  .tst-status.ok{background:#eef7ef;color:#245c33;border:1px solid #cfe6d4}
+  .tst-status.bad{background:#fdecea;color:#8f2018;border:1px solid #f5c6c2}
+  .tst-done{text-align:center;padding:22px 4px 6px}
+  .tst-done h4{font-family:'Playfair Display',serif;font-size:24px;color:var(--brown-deep);margin-bottom:8px}
+  .tst-done p{font-size:14px;color:var(--muted);line-height:1.6}
   .inq select{
     width:100%;font-family:inherit;font-size:14px;color:var(--text);background:#fdfaf8;
     border:1.5px solid #e6d5da;border-radius:9px;padding:10px 12px;
@@ -939,6 +947,7 @@
     <p class="intro">Tell us how working with Mandi went. Testimonials are reviewed before they appear on this page.</p>
 
     <form id="tstForm" novalidate>
+      <input type="checkbox" name="botcheck" class="tst-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="field">
         <label for="tstName">Your name <span class="req">*</span></label>
         <input id="tstName" type="text" autocomplete="name">
@@ -982,13 +991,9 @@
       </div>
     </form>
 
-    <div class="inq-fallback" id="tstFallback">
-      <strong>Didn't your email app open?</strong> Copy your testimonial and send it to
-      <a href="mailto:isaiahgoodrch@gmail.com">isaiahgoodrch@gmail.com</a>.
-      <br><button class="inq-copy" type="button" id="tstCopy">Copy testimonial</button>
-    </div>
+    <div class="tst-status" id="tstStatus" role="status" aria-live="polite"></div>
 
-    <p class="inq-note">This opens your email app with your testimonial filled in. Nothing is published automatically — every testimonial is reviewed before it appears on the site.</p>
+    <p class="inq-note">Nothing is published automatically — every testimonial is reviewed before it appears on the site.</p>
   </div>
 </dialog>
 
@@ -1208,32 +1213,24 @@
 </script>
 
 <script>
-/* testimonial submissions */
+/* testimonial submissions — posted straight to Web3Forms, which forwards to
+   Isaiah's inbox. No mail client involved, and his address is not in this page. */
 (function(){
-  /* Testimonials go to Isaiah only, not Mandi — they are reviewed and edited
-     before anything is added to the page. The brand inquiry form is separate
-     and still goes to Mandi. */
-  var TO = 'isaiahgoodrch@gmail.com';
-  var dlg      = document.getElementById('tstDialog');
-  var form     = document.getElementById('tstForm');
-  var fallback = document.getElementById('tstFallback');
-  var openers  = document.querySelectorAll('.t-open');
-  if(!dlg || !form || !openers.length || typeof dlg.showModal !== 'function'){
-    openers.forEach(function(t){
-      t.addEventListener('click', function(){ window.location.href = 'mailto:' + TO; });
-    });
-    return;
-  }
+  var KEY = '6827239c-20e6-40e6-be9e-663a1197bbc8';
+  var dlg    = document.getElementById('tstDialog');
+  var form   = document.getElementById('tstForm');
+  var status = document.getElementById('tstStatus');
+  var openers = document.querySelectorAll('.t-open');
+  if(!dlg || !form || !openers.length || typeof dlg.showModal !== 'function') return;
 
   var fields = [
-    {el: document.getElementById('tstName'),   label: 'Name'},
-    {el: document.getElementById('tstEmail'),  label: 'Email', email: true},
-    {el: document.getElementById('tstBrand'),  label: 'Brand'},
-    {el: document.getElementById('tstRole'),   label: 'Role', optional: true},
-    {el: document.getElementById('tstRating'), label: 'Rating'},
-    {el: document.getElementById('tstText'),   label: 'Testimonial'}
+    {el: document.getElementById('tstName'),   key: 'name'},
+    {el: document.getElementById('tstEmail'),  key: 'email', email: true},
+    {el: document.getElementById('tstBrand'),  key: 'brand'},
+    {el: document.getElementById('tstRole'),   key: 'role', optional: true},
+    {el: document.getElementById('tstRating'), key: 'rating'},
+    {el: document.getElementById('tstText'),   key: 'testimonial'}
   ];
-  var lastBody = '';
 
   function valid(f){
     var v = f.el.value.trim();
@@ -1243,8 +1240,12 @@
     return true;
   }
   function markInvalid(f, bad){
-    var wrap = f.el.closest('.field');
-    if(wrap) wrap.classList.toggle('invalid', bad);
+    var w = f.el.closest('.field');
+    if(w) w.classList.toggle('invalid', bad);
+  }
+  function say(msg, ok){
+    status.textContent = msg;
+    status.className = 'tst-status show ' + (ok ? 'ok' : 'bad');
   }
 
   openers.forEach(function(t){
@@ -1257,20 +1258,19 @@
   document.getElementById('tstClose').addEventListener('click', function(){ dlg.close(); });
   document.getElementById('tstCancel').addEventListener('click', function(){ dlg.close(); });
   dlg.addEventListener('click', function(e){ if(e.target === dlg) dlg.close(); });
-  dlg.addEventListener('close', function(){
-    document.body.style.overflow = '';
-    fallback.classList.remove('show');
-  });
+  dlg.addEventListener('close', function(){ document.body.style.overflow = ''; });
 
   fields.forEach(function(f){
     f.el.addEventListener('input', function(){
-      var wrap = f.el.closest('.field');
-      if(wrap && wrap.classList.contains('invalid')) markInvalid(f, !valid(f));
+      var w = f.el.closest('.field');
+      if(w && w.classList.contains('invalid')) markInvalid(f, !valid(f));
     });
   });
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
+    if(form.querySelector('.tst-hp') && form.querySelector('.tst-hp').checked) return; // bot
+
     var firstBad = null;
     fields.forEach(function(f){
       var ok = valid(f);
@@ -1279,31 +1279,45 @@
     });
     if(firstBad){ firstBad.focus(); return; }
 
-    var v = fields.map(function(f){ return f.el.value.trim(); });
-    var stars = v[4] ? new Array(parseInt(v[4],10)+1).join('*') : '';
-    var subject = 'Testimonial for Mandi - ' + v[2];
-    lastBody =
-      'Name: '   + v[0] + '\n' +
-      'Email: '  + v[1] + '\n' +
-      'Brand: '  + v[2] + '\n' +
-      'Role: '   + (v[3] || '-') + '\n' +
-      'Rating: ' + v[4] + '/5 ' + stars + '\n\n' +
-      'Testimonial:\n' + v[5] + '\n';
+    var btn = form.querySelector('.inq-send');
+    var label = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Sending…';
+    status.className = 'tst-status';
 
-    window.location.href = 'mailto:' + TO +
-      '?subject=' + encodeURIComponent(subject) +
-      '&body='    + encodeURIComponent(lastBody);
+    var v = {};
+    fields.forEach(function(f){ v[f.key] = f.el.value.trim(); });
+    var stars = v.rating ? new Array(parseInt(v.rating,10)+1).join('*') : '';
 
-    setTimeout(function(){ fallback.classList.add('show'); }, 700);
-  });
-
-  document.getElementById('tstCopy').addEventListener('click', function(){
-    var btn = this;
-    var text = 'To: ' + TO + '\n\n' + lastBody;
-    function done(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy testimonial'; }, 2000); }
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(done, function(){ done(); });
-    } else { done(); }
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify({
+        access_key: KEY,
+        subject: 'Testimonial for Mandi — ' + v.brand,
+        from_name: 'Mandi Bagley portfolio',
+        'Name': v.name,
+        'Email': v.email,
+        'Brand': v.brand,
+        'Role': v.role || '—',
+        'Rating': v.rating + '/5 ' + stars,
+        'Testimonial': v.testimonial
+      })
+    })
+    .then(function(r){ return r.json().catch(function(){ throw new Error('bad response'); }); })
+    .then(function(d){
+      if(!d || !d.success) throw new Error(d && d.message ? d.message : 'send failed');
+      // swap the form out for a confirmation
+      form.style.display = 'none';
+      status.className = 'tst-status';
+      var done = document.createElement('div');
+      done.className = 'tst-done';
+      done.innerHTML = '<h4>Thank you</h4><p>Your testimonial has been sent. It will be reviewed before it appears on the site.</p>';
+      form.parentNode.insertBefore(done, form.nextSibling);
+    })
+    .catch(function(){
+      btn.disabled = false; btn.textContent = label;
+      say('Something went wrong sending that. Please try again in a moment.', false);
+    });
   });
 })();
 </script>
