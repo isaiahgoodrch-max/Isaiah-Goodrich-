@@ -984,11 +984,11 @@
 
     <div class="inq-fallback" id="tstFallback">
       <strong>Didn't your email app open?</strong> Copy your testimonial and send it to
-      <a href="mailto:bagleyamanda95@gmail.com">bagleyamanda95@gmail.com</a>.
+      <a href="mailto:isaiahgoodrch@gmail.com">isaiahgoodrch@gmail.com</a>.
       <br><button class="inq-copy" type="button" id="tstCopy">Copy testimonial</button>
     </div>
 
-    <p class="inq-note">This opens your email app with your testimonial filled in. Nothing is published automatically — Mandi reviews each one before it appears on the site.</p>
+    <p class="inq-note">This opens your email app with your testimonial filled in. Nothing is published automatically — every testimonial is reviewed before it appears on the site.</p>
   </div>
 </dialog>
 
@@ -1210,9 +1210,10 @@
 <script>
 /* testimonial submissions */
 (function(){
-  /* Two recipients so the testimonial reaches Mandi and Isaiah for review
-     before anything is published on the page. */
-  var TO = 'bagleyamanda95@gmail.com,isaiahgoodrch@gmail.com';
+  /* Testimonials go to Isaiah only, not Mandi — they are reviewed and edited
+     before anything is added to the page. The brand inquiry form is separate
+     and still goes to Mandi. */
+  var TO = 'isaiahgoodrch@gmail.com';
   var dlg      = document.getElementById('tstDialog');
   var form     = document.getElementById('tstForm');
   var fallback = document.getElementById('tstFallback');
