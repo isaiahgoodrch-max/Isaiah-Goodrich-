@@ -115,6 +115,9 @@
   .ph .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
   .ph svg{width:26px;height:26px;fill:#c08fa0}
   .hero-portrait{aspect-ratio:4/5;box-shadow:0 18px 40px rgba(60,48,38,.18)}
+  /* real photos: fill the box the placeholder used to occupy */
+  .portrait{position:relative;overflow:hidden;border-radius:10px}
+  .portrait img{width:100%;height:100%;object-fit:cover;display:block}
 
   /* ---------- TRUSTED BY ---------- */
   .trusted{background:var(--brown);padding:34px 0 40px;color:#efe7dd}
@@ -608,10 +611,8 @@
       <p class="mediakit">For brand partnerships &amp; media kit, <button type="button" class="inq-open" id="inqTrigger">click here</button></p>
     </div>
 
-    <div class="ph hero-portrait">
-      <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4 0-8 2-8 5v1h16v-1c0-3-4-5-8-5Z"/></svg>
-      <div class="mono">MB</div>
-      <div class="lbl">Hero Portrait / Add Photo</div>
+    <div class="hero-portrait portrait">
+      <img src="images/hero-mandi.jpg" alt="Mandi Bagley at the gym" width="900" height="1126" decoding="async">
     </div>
   </div>
 </header>
@@ -784,10 +785,8 @@
       </div>
       <p class="bio">A fitness, faith, and food content creator passionate about helping people feel their best. From workouts to recipes to real life, this is where it all comes together. Authentic, relatable content that builds trust with an audience and drives real results for the brands I partner with.</p>
     </div>
-    <div class="ph who-portrait">
-      <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4 0-8 2-8 5v1h16v-1c0-3-4-5-8-5Z"/></svg>
-      <div class="mono">MB</div>
-      <div class="lbl">Add Photo</div>
+    <div class="who-portrait portrait">
+      <img src="images/who-mandi.jpg" alt="Mandi Bagley in the gym" width="900" height="1200" decoding="async">
     </div>
   </div>
 </section>
