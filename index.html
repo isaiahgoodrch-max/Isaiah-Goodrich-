@@ -292,7 +292,8 @@
   .step .body{background:var(--brown-2);color:#f0e9e1;border-radius:10px;padding:16px 18px;margin-top:10px;font-size:13.5px;line-height:1.6}
 
   /* ---------- RATES & SERVICES ---------- */
-  .rs-grid{display:grid;grid-template-columns:.9fr 1.1fr 1.1fr;gap:22px;align-items:start}
+  .rs-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:26px;align-items:start}
+  .rs-col{display:grid;gap:20px}
   .rs-photo{aspect-ratio:3/4}
   .rs-card{background:var(--brown-2);color:#f1eae2;border-radius:14px;padding:26px 24px}
   .rs-card h4{font-family:'Playfair Display',serif;font-size:30px;margin-bottom:14px;color:#fff}
@@ -304,8 +305,6 @@
   .rs-title{display:flex;flex-direction:column;justify-content:center}
   .rs-title .a{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(40px,6vw,64px);color:var(--brown-deep);line-height:.9}
   .rs-title .b{font-family:'Anton',sans-serif;font-size:clamp(40px,6vw,66px);color:var(--pink-deep);text-transform:uppercase;line-height:.9}
-  .addons{margin-top:18px}
-  .addons h5{font-family:'Playfair Display',serif;font-size:20px;color:var(--pink-soft);margin-bottom:6px}
 
   /* ---------- CONTACT ---------- */
   .contact-sec{background:var(--brown);color:#f2ebe3;padding:52px 0}
@@ -762,10 +761,14 @@
         <div class="lbl">Add Photo</div>
       </div>
 
-      <div class="rs-card">
-        <h4>Services</h4>
-        <ul>
-          <li>Short-form video content (15 to 30 seconds)</li>
+      <div class="rs-col">
+        <div class="rs-title">
+          <span class="a serif">Naturally</span>
+          <span class="b">Integrated Services</span>
+        </div>
+        <div class="rs-card">
+          <ul>
+            <li>Short-form video content (15 to 30 seconds)</li>
           <li>Long-form content (1 to 2 minutes)</li>
           <li>Photography packages</li>
           <li>Add-ons</li>
@@ -776,29 +779,6 @@
         <div class="sub">Monthly Retainers</div>
         <ul><li>2 to 3 videos per month</li></ul>
         <p class="fine">Please contact for exact pricing. Discounted bundles available.</p>
-      </div>
-
-      <div style="display:grid;gap:22px">
-        <div class="rs-title">
-          <span class="a serif">Naturally</span>
-          <span class="b">Integrated Services</span>
-        </div>
-        <div class="rs-card">
-          <div class="addons">
-            <h5>Add-Ons</h5>
-            <ul>
-              <li>Additional hooks / CTAs</li>
-              <li>Raw footage</li>
-              <li>Whitelisting</li>
-              <li>Script writing / content ideation</li>
-            </ul>
-          </div>
-          <div class="sub">What Do You Get?</div>
-          <ul>
-            <li>Content ready for paid ads</li>
-            <li>Research, hook, CTA, scripting, editing &amp; usage rights</li>
-            <li>Variations of the same video to test different versions</li>
-          </ul>
         </div>
       </div>
     </div>
