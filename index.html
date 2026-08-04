@@ -258,6 +258,15 @@
   /* a card holding a photo drops the dashed placeholder treatment */
   .vcard.has-media{border-style:solid;border-color:transparent}
   .vcard.has-media .vlbl{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.7);z-index:2}
+  .vcard.has-video{cursor:pointer}
+  .vcard.has-video .play{position:absolute;z-index:2;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+  .vcard.has-video::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(to top,rgba(0,0,0,.30) 0%,rgba(0,0,0,0) 55%);
+  }
+  .vcard.has-video:hover .play{transform:scale(1.08)}
+  .vcard.has-video .play{transition:transform .18s}
+  .vcard video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:3;background:#000}
   .vcard .play{
     width:52px;height:52px;border-radius:50%;background:var(--pink-deep);
     display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(182,74,106,.35);
@@ -705,9 +714,9 @@
         <div class="vcard has-media"><img src="images/exp-shark-2.jpg" alt="A shark passing below Mandi while freediving" width="600" height="900" loading="lazy" decoding="async"></div>
         <div class="vcard has-media"><img src="images/exp-shark-3.jpg" alt="Mandi and a shark in open water" width="600" height="900" loading="lazy" decoding="async"></div>
         <div class="vcard has-media"><img src="images/exp-balloon.jpg" alt="Sunrise hot air balloon flight over Sedona with a SOAR bar" width="675" height="900" loading="lazy" decoding="async"></div>
-        <div class="vcard has-media"><img src="images/exp-mermaids.jpg" alt="Freediving with friends" width="505" height="900" loading="lazy" decoding="async"></div>
-        <div class="vcard has-media"><img src="images/exp-gods-creation.jpg" alt="Freediving with sharks in open water" width="505" height="900" loading="lazy" decoding="async"></div>
-        <div class="vcard has-media"><img src="images/exp-hyperbaric.jpg" alt="Hyperbaric chamber recovery session" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media has-video" data-video="video/exp-mermaids.mp4"><img src="images/exp-mermaids.jpg" alt="Freediving with friends" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
+        <div class="vcard has-media has-video" data-video="video/exp-gods-creation.mp4"><img src="images/exp-gods-creation.jpg" alt="Freediving with sharks in open water" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
+        <div class="vcard has-media has-video" data-video="video/exp-hyperbaric.mp4"><img src="images/exp-hyperbaric.jpg" alt="Hyperbaric chamber recovery session" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
       </div>
     </div>
 
@@ -717,9 +726,9 @@
       <div class="reel">
         <div class="vcard has-media"><img src="images/well-urbanroots.jpg" alt="Mandi holding an Urban Roots Farms TrueMyco jar over avocado toast" width="506" height="900" loading="lazy" decoding="async"></div>
         <div class="vcard has-media"><img src="images/well-truemyco.jpg" alt="Mandi spooning Urban Roots TrueMyco into her breakfast" width="506" height="900" loading="lazy" decoding="async"></div>
-        <div class="vcard has-media"><img src="images/wel-berry-smoothie.jpg" alt="High protein berry smoothie with Lifeway kefir" width="505" height="900" loading="lazy" decoding="async"></div>
-        <div class="vcard has-media"><img src="images/wel-beach-grip.jpg" alt="SOAR creatine protein bar at the beach" width="505" height="900" loading="lazy" decoding="async"></div>
-        <div class="vcard has-media"><img src="images/wel-soar-sand.jpg" alt="SOAR bar and swimwear on the sand" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media has-video" data-video="video/wel-berry-smoothie.mp4"><img src="images/wel-berry-smoothie.jpg" alt="High protein berry smoothie with Lifeway kefir" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
+        <div class="vcard has-media has-video" data-video="video/wel-beach-grip.mp4"><img src="images/wel-beach-grip.jpg" alt="SOAR creatine protein bar at the beach" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
+        <div class="vcard has-media has-video" data-video="video/wel-soar-sand.mp4"><img src="images/wel-soar-sand.jpg" alt="SOAR bar and swimwear on the sand" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard"><div class="badge"><span class="b-ghost">GHOST</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
         <div class="vcard"><div class="badge"><span class="b-soar">SOAR</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
         <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
@@ -731,7 +740,7 @@
     <div class="cat">
       <div class="cat-bar">Activewear &amp; Apparel</div>
       <div class="reel">
-        <div class="vcard has-media"><img src="images/act-code-mandi.jpg" alt="Activewear haul with discount code MANDI" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media has-video" data-video="video/act-code-mandi.mp4"><img src="images/act-code-mandi.jpg" alt="Activewear haul with discount code MANDI" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard"><div class="badge"><span class="b-gs">GYMSHARK</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
         <div class="vcard"><div class="badge"><span class="b-dfyne">DFYNE</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
         <div class="vcard"><div class="badge"><span class="b-teveo">TEVEO</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
@@ -743,7 +752,7 @@
     <div class="cat">
       <div class="cat-bar">Cosmetics</div>
       <div class="reel">
-        <div class="vcard has-media"><img src="images/cos-routine.jpg" alt="Getting ready routine" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media has-video" data-video="video/cos-routine.mp4"><img src="images/cos-routine.jpg" alt="Getting ready routine" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
         <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
         <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
@@ -755,8 +764,8 @@
     <div class="cat">
       <div class="cat-bar">Fitness</div>
       <div class="reel">
-        <div class="vcard has-media"><img src="images/fit-healthy-habits.jpg" alt="Healthy habits — training and kitchen routine" width="505" height="900" loading="lazy" decoding="async"></div>
-        <div class="vcard has-media"><img src="images/fit-hotel-gym.jpg" alt="Hotel gym on the road" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media has-video" data-video="video/fit-healthy-habits.mp4"><img src="images/fit-healthy-habits.jpg" alt="Healthy habits — training and kitchen routine" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
+        <div class="vcard has-media has-video" data-video="video/fit-hotel-gym.mp4"><img src="images/fit-hotel-gym.jpg" alt="Hotel gym on the road" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard"><div class="badge"><span class="b-gs">GYMSHARK</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
         <div class="vcard"><div class="badge"><span class="b-dfyne">DFYNE</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
         <div class="vcard"><div class="badge"><span class="b-teveo">TEVEO</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
@@ -1043,6 +1052,22 @@
 </dialog>
 
 <script>
+/* portfolio video cards — the file is only fetched when someone clicks,
+   so the page stays light no matter how many clips are on it */
+(function(){
+  document.querySelectorAll('.vcard.has-video').forEach(function(card){
+    card.addEventListener('click', function(){
+      if(card.querySelector('video')) return;
+      var v = document.createElement('video');
+      v.src = card.getAttribute('data-video');
+      v.controls = true; v.autoplay = true; v.playsInline = true; v.preload = 'none';
+      v.setAttribute('playsinline','');
+      card.appendChild(v);
+      var p = card.querySelector('.play'); if(p) p.style.display = 'none';
+    });
+  });
+})();
+
 /* brand photo marquee — duplicate the strip so the loop has no visible seam.
    Cloning at runtime means only one set of items is maintained in the markup. */
 (function(){
