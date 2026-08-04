@@ -254,6 +254,10 @@
     border:2px dashed var(--line);scroll-snap-align:start;
     display:flex;align-items:center;justify-content:center;overflow:hidden;
   }
+  .vcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  /* a card holding a photo drops the dashed placeholder treatment */
+  .vcard.has-media{border-style:solid;border-color:transparent}
+  .vcard.has-media .vlbl{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.7);z-index:2}
   .vcard .play{
     width:52px;height:52px;border-radius:50%;background:var(--pink-deep);
     display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(182,74,106,.35);
@@ -693,10 +697,22 @@
       </div>
     </div>
 
+    <!-- EXPERIENCES -->
+    <div class="cat">
+      <div class="cat-bar">Experiences</div>
+      <div class="reel">
+        <div class="vcard has-media"><img src="images/exp-shark.jpg" alt="Mandi freediving alongside a shark" width="600" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
+        <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
+        <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
+      </div>
+    </div>
+
     <!-- WELLNESS & SUPPLEMENTS -->
     <div class="cat">
       <div class="cat-bar">Wellness &amp; Supplements</div>
       <div class="reel">
+        <div class="vcard has-media"><img src="images/well-urbanroots.jpg" alt="Mandi holding an Urban Roots Farms TrueMyco jar over avocado toast" width="506" height="900" loading="lazy" decoding="async"></div>
         <div class="vcard"><div class="badge"><span class="b-ghost">GHOST</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
         <div class="vcard"><div class="badge"><span class="b-soar">SOAR</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
         <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
