@@ -369,6 +369,23 @@
   .sign{font-family:'Playfair Display',serif;font-style:italic;font-size:34px;color:var(--pink-soft);margin-top:22px}
   .contact-sec .socials a{background:#2c2621}
   .foot-note{text-align:center;font-size:11px;color:rgba(242,235,227,.6);letter-spacing:1px;margin-top:34px}
+  /* build credit, links out to Platforms by Isaiah Goodrich */
+  .site-credit{
+    display:flex;align-items:center;justify-content:center;gap:9px;
+    margin-top:16px;text-decoration:none;opacity:.62;transition:opacity .2s;
+  }
+  .site-credit:hover{opacity:1}
+  .site-credit:focus-visible{outline:2px solid var(--pink-soft);outline-offset:5px;border-radius:6px;opacity:1}
+  .site-credit .ig{
+    width:23px;height:23px;border-radius:6px;background:#8f74c4;color:#fff;flex:none;
+    font-family:'Anton',sans-serif;font-size:10.5px;letter-spacing:.4px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .site-credit .txt{
+    font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;
+    color:rgba(242,235,227,.9);
+  }
+  .site-credit .txt i{font-style:italic;text-transform:lowercase;letter-spacing:.4px;opacity:.75}
 
   /* ---------- TRAVEL ---------- */
   .tt{position:relative;width:100%;max-width:330px;aspect-ratio:9/16;margin:0 auto;border-radius:16px;overflow:hidden;background:#141414;box-shadow:0 12px 30px rgba(60,48,38,.22)}
@@ -898,6 +915,10 @@
     </div>
   </div>
   <div class="foot-note">MANDI BAGLEY · UGC PORTFOLIO</div>
+  <a class="site-credit" href="https://platforms-by-isaiah.vercel.app" target="_blank" rel="noopener" aria-label="Site by Platforms by Isaiah Goodrich">
+    <span class="ig">IG</span>
+    <span class="txt">Platforms <i>by</i> Isaiah Goodrich</span>
+  </a>
 </section>
 
 <script>
