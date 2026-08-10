@@ -85,6 +85,19 @@
     width:40px;height:40px;border-radius:50%;background:var(--ink);
     display:flex;align-items:center;justify-content:center;transition:transform .18s,background .2s;
   }
+  /* the hero set is the first thing a brand looks for, so size it up */
+  .hero .socials{gap:14px;margin-bottom:24px}
+  .hero .socials a{
+    width:54px;height:54px;
+    box-shadow:0 5px 14px rgba(33,29,25,.28);
+  }
+  .hero .socials a:hover{transform:translateY(-4px) scale(1.04)}
+  .hero .socials svg{width:25px;height:25px}
+  @media(max-width:520px){
+    .hero .socials{gap:11px}
+    .hero .socials a{width:47px;height:47px}
+    .hero .socials svg{width:22px;height:22px}
+  }
   .socials a:hover{transform:translateY(-3px);background:var(--pink-deep)}
   .socials svg{width:19px;height:19px;fill:#fff}
   .contact-line{display:flex;align-items:center;gap:9px;font-size:15px;color:var(--brown-deep);margin-bottom:8px}
@@ -616,7 +629,7 @@
         <a href="https://youtube.com/@mandibagleyy" title="YouTube" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6Z"/></svg>
         </a>
-        <a href="https://snapchat.com/t/TC1TuvC1" title="Snapchat" target="_blank" rel="noopener">
+        <a href="https://www.snapchat.com/add/mandibagleyy" title="Snapchat" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M12 2.2c2.9 0 4.7 2.2 4.8 5 0 .6 0 1.3-.1 2 .3.2.7.2 1 .1.3-.1.6-.2.9-.2.5 0 1 .3 1 .9 0 .7-.9 1-1.6 1.3-.4.1-.9.3-1 .6-.1.3.1.7.3 1 .9 1.6 2.3 2.6 3.9 3 .4.1.6.4.6.7 0 .8-1.9 1.3-2.7 1.5-.1.3-.2.7-.3 1-.1.3-.3.4-.6.4-.4 0-.9-.2-1.6-.2-.9 0-1.4.1-2 .6-.8.6-1.7 1.3-3 1.3s-2.2-.7-3-1.3c-.6-.5-1.1-.6-2-.6-.7 0-1.2.2-1.6.2-.3 0-.5-.1-.6-.4-.1-.3-.2-.7-.3-1-.8-.2-2.7-.7-2.7-1.5 0-.3.2-.6.6-.7 1.6-.4 3-1.4 3.9-3 .2-.3.4-.7.3-1-.1-.3-.6-.5-1-.6-.7-.3-1.6-.6-1.6-1.3 0-.6.5-.9 1-.9.3 0 .6.1.9.2.3.1.7.1 1-.1-.1-.7-.1-1.4-.1-2 .1-2.8 1.9-5 4.8-5Z"/></svg>
         </a>
         <a href="https://www.instagram.com/manditory_munchies" title="Food IG @manditory_munchies" target="_blank" rel="noopener">
