@@ -371,21 +371,33 @@
   .foot-note{text-align:center;font-size:11px;color:rgba(242,235,227,.6);letter-spacing:1px;margin-top:34px}
   /* build credit, links out to Platforms by Isaiah Goodrich */
   .site-credit{
-    display:flex;align-items:center;justify-content:center;gap:9px;
-    margin-top:16px;text-decoration:none;opacity:.62;transition:opacity .2s;
+    display:inline-flex;align-items:center;gap:13px;
+    margin:26px auto 0;padding:13px 24px 13px 15px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);
+    border-radius:44px;text-decoration:none;
+    transition:background .2s,border-color .2s,transform .2s;
   }
-  .site-credit:hover{opacity:1}
-  .site-credit:focus-visible{outline:2px solid var(--pink-soft);outline-offset:5px;border-radius:6px;opacity:1}
+  .site-credit:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.36);transform:translateY(-2px)}
+  .site-credit:focus-visible{outline:3px solid var(--pink-soft);outline-offset:4px}
+  .credit-wrap{display:flex;justify-content:center}
   .site-credit .ig{
-    width:23px;height:23px;border-radius:6px;background:#8f74c4;color:#fff;flex:none;
-    font-family:'Anton',sans-serif;font-size:10.5px;letter-spacing:.4px;
+    width:40px;height:40px;border-radius:11px;background:#8f74c4;color:#fff;flex:none;
+    font-family:'Anton',sans-serif;font-size:17px;letter-spacing:.5px;
     display:flex;align-items:center;justify-content:center;
+    box-shadow:0 3px 10px rgba(143,116,196,.45);
   }
-  .site-credit .txt{
-    font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;
-    color:rgba(242,235,227,.9);
+  .site-credit .cr-txt{display:flex;flex-direction:column;gap:2px;text-align:left}
+  .site-credit .cr-label{
+    font-size:9.5px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;
+    color:var(--pink-soft);
   }
-  .site-credit .txt i{font-style:italic;text-transform:lowercase;letter-spacing:.4px;opacity:.75}
+  .site-credit .cr-name{font-size:15px;font-weight:700;color:#fff;letter-spacing:.3px;line-height:1.2}
+  .site-credit .cr-name i{font-style:italic;font-weight:400;opacity:.8}
+  @media(max-width:520px){
+    .site-credit{gap:11px;padding:11px 18px 11px 12px}
+    .site-credit .ig{width:34px;height:34px;font-size:14px;border-radius:9px}
+    .site-credit .cr-name{font-size:13.5px}
+  }
 
   /* ---------- TRAVEL ---------- */
   .tt{position:relative;width:100%;max-width:330px;aspect-ratio:9/16;margin:0 auto;border-radius:16px;overflow:hidden;background:#141414;box-shadow:0 12px 30px rgba(60,48,38,.22)}
@@ -915,10 +927,15 @@
     </div>
   </div>
   <div class="foot-note">MANDI BAGLEY · UGC PORTFOLIO</div>
-  <a class="site-credit" href="https://platforms-by-isaiah.vercel.app" target="_blank" rel="noopener" aria-label="Site by Platforms by Isaiah Goodrich">
-    <span class="ig">IG</span>
-    <span class="txt">Platforms <i>by</i> Isaiah Goodrich</span>
-  </a>
+  <div class="credit-wrap">
+    <a class="site-credit" href="https://platforms-by-isaiah.vercel.app" target="_blank" rel="noopener">
+      <span class="ig">IG</span>
+      <span class="cr-txt">
+        <span class="cr-label">Site by</span>
+        <span class="cr-name">Platforms <i>by</i> Isaiah Goodrich</span>
+      </span>
+    </a>
+  </div>
 </section>
 
 <script>
