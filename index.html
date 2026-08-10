@@ -121,10 +121,6 @@
 
   /* ---------- TRUSTED BY ---------- */
   .trusted{background:var(--brown);padding:34px 0 40px;color:#efe7dd}
-  .trusted h2{
-    text-align:center;font-weight:700;letter-spacing:3px;font-size:15px;
-    text-transform:uppercase;margin-bottom:26px;color:#efe7dd;
-  }
   /* wider container + bigger gap: more air between circles while each one still
      grows ~5%, which a bigger gap alone would have taken away */
   .trusted .wrap{max-width:1500px}
@@ -169,9 +165,6 @@
     a.brand,a.brand img{transition:none}
     a.brand:hover{transform:none}
   }
-  .brand.empty{background:rgba(244,239,232,.12);border:1.5px dashed rgba(244,239,232,.4);box-shadow:none}
-  .brand.empty span{color:var(--pink-soft);font-weight:500;font-size:20px}
-  .trusted .note{text-align:center;margin-top:20px;font-size:12px;letter-spacing:1px;color:rgba(239,231,221,.7)}
 
   /* ---------- BRAND LOGO MARKS (stylized recreations) ---------- */
   .mk{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;line-height:1;width:100%}
@@ -260,7 +253,6 @@
   .vcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
   /* a card holding a photo drops the dashed placeholder treatment */
   .vcard.has-media{border-style:solid;border-color:transparent}
-  .vcard.has-media .vlbl{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.7);z-index:2}
   .vcard.has-video{cursor:pointer}
   .vcard.has-video .play{position:absolute;z-index:2;box-shadow:0 4px 14px rgba(0,0,0,.35)}
   .vcard.has-video::after{
@@ -275,10 +267,6 @@
     display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(182,74,106,.35);
   }
   .vcard .play svg{width:22px;height:22px;fill:#fff;margin-left:3px}
-  .vcard .vlbl{
-    position:absolute;bottom:10px;left:0;right:0;text-align:center;
-    font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#a37d8a;font-weight:600;
-  }
   .badge{
     position:absolute;top:9px;left:9px;width:44px;height:44px;border-radius:50%;
     background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.22);
@@ -399,10 +387,6 @@
   .tt-hint{position:relative;z-index:2;font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:.85;text-shadow:0 1px 4px rgba(0,0,0,.55)}
   .tt-ext{position:absolute;top:10px;right:10px;z-index:3;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;text-decoration:none}
   .tt-ext svg{width:15px;height:15px;fill:#fff}
-  .slot{width:100%;max-width:330px;aspect-ratio:9/16;border-radius:16px;background:linear-gradient(160deg,#f7e8eb,#ecd5db);border:2px dashed var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#a37d8a;text-align:center}
-  .slot .play{width:54px;height:54px;border-radius:50%;background:var(--pink-deep);display:flex;align-items:center;justify-content:center}
-  .slot .play svg{width:22px;height:22px;fill:#fff;margin-left:3px}
-  .slot .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
 
   /* Travel lives in the Featured Work reels, so the TikTok cards and the empty
      slot take the same track width as a .vcard instead of the old 330px grid */
@@ -628,7 +612,6 @@
 <!-- TRUSTED BY -->
 <section class="trusted">
   <div class="wrap">
-    <h2>Trusted by brands including</h2>
     <div class="brand-grid">
       <a class="brand has-photo" href="https://www.gymshark.com/" target="_blank" rel="noopener sponsored">
         <img src="images/gymshark-sm.jpg" alt="Mandi Bagley wearing Gymshark" width="429" height="500" decoding="async">
@@ -654,10 +637,7 @@
         <img src="images/urbanroots-sm.jpg" alt="Urban Roots Farms TrueMicro jar with microgreens and berries" width="500" height="373" decoding="async">
         <span class="brand-name">Urban Roots</span>
       </a>
-      <div class="brand empty"><span>+</span></div>
-      <div class="brand empty"><span>+</span></div>
     </div>
-    <p class="note">Add more circles as partnerships grow</p>
   </div>
 </section>
 
@@ -695,7 +675,7 @@
     <div class="dhead">
       <span class="a serif">Naturally</span> <span class="b">Integrated Content</span>
     </div>
-    <p class="dsub">Paid partnerships and organic content that lives in the feed rather than interrupting it — organized by category.</p>
+    <p class="dsub">Paid partnerships and organic content that lives in the feed rather than interrupting it, organized by category.</p>
 
     <!-- TRAVEL -->
     <div class="cat" id="travel">
@@ -728,7 +708,6 @@
             <div class="tt-hint">Tap to play</div>
           </button>
         </div>
-        <div class="slot"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="lbl">Add TikTok</div></div>
       </div>
     </div>
 
@@ -740,6 +719,10 @@
         <div class="vcard has-media has-video" data-video="video/exp-gods-creation.mp4"><img src="images/exp-gods-creation.jpg" alt="Freediving with sharks in open water" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/exp-hyperbaric.mp4"><img src="images/exp-hyperbaric.jpg" alt="Hyperbaric chamber recovery session" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/exp-boat-day.mp4"><img src="images/exp-boat-day.jpg" alt="A boat day out on the water" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
+        <div class="vcard has-media"><img src="images/exp-shark.jpg" alt="Freediving alongside a shark" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media"><img src="images/exp-shark-2.jpg" alt="A shark passing below while freediving" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media"><img src="images/exp-shark-3.jpg" alt="Open water freediving with a shark" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media"><img src="images/exp-balloon.jpg" alt="Sunrise hot air balloon over Sedona" width="505" height="900" loading="lazy" decoding="async"></div>
       </div>
     </div>
 
@@ -756,10 +739,11 @@
         <div class="vcard has-media has-video" data-video="video/wel-protein-baking.mp4"><img src="images/wel-protein-baking.jpg" alt="Baking with protein powder" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/wel-sweet-potato.mp4"><img src="images/wel-sweet-potato.jpg" alt="Cooking with sweet potatoes" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/wel-kitchen-shake.mp4"><img src="images/wel-kitchen-shake.jpg" alt="Making a shake in the kitchen" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
-        <div class="vcard"><div class="badge"><span class="b-ghost">GHOST</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
-        <div class="vcard"><div class="badge"><span class="b-soar">SOAR</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
-        <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
-        <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
+        <div class="vcard has-media"><img src="images/well-urbanroots.jpg" alt="Urban Roots Farms TrueMyco jar" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media"><img src="images/well-truemyco.jpg" alt="Spooning TrueMyco into breakfast" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media"><img src="images/ghost-energy-white.jpg" alt="Ghost Energy Sour Patch Redberry" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media"><img src="images/ghost-energy-pink.jpg" alt="Ghost Energy Sour Patch" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media"><img src="images/ghost-welchs-snow.jpg" alt="Ghost Energy Welch's Grape in the snow" width="505" height="900" loading="lazy" decoding="async"></div>
       </div>
     </div>
 
@@ -772,10 +756,11 @@
         <div class="vcard has-media has-video" data-video="video/act-red-set.mp4"><img src="images/act-red-set.jpg" alt="Trying on a new red matching gym set" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/act-blue-set.mp4"><img src="images/act-blue-set.jpg" alt="Trying on a new blue matching set" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/act-teveo.mp4"><img src="images/act-teveo.jpg" alt="TEVEO set and tote in the mirror" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
-        <div class="vcard"><div class="badge"><span class="b-gs">GYMSHARK</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
-        <div class="vcard"><div class="badge"><span class="b-dfyne">DFYNE</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
-        <div class="vcard"><div class="badge"><span class="b-teveo">TEVEO</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
-        <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
+        <div class="vcard has-media"><img src="images/ghost-monocloud.jpg" alt="Ghost Lifestyle Monocloud shoot" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media"><img src="images/ghost-uni-sage.jpg" alt="Ghost Lifestyle University collection" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media"><img src="images/ghost-tour-tee.jpg" alt="Ghost Unmatched Energy tour tee" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media"><img src="images/ghost-gym-crew.jpg" alt="Ghost Lifestyle gym shoot" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media"><img src="images/gymshark-y2k.jpg" alt="Y2K record store editorial in Gymshark" width="505" height="900" loading="lazy" decoding="async"></div>
       </div>
     </div>
 
@@ -786,10 +771,6 @@
         <div class="vcard has-media has-video" data-video="video/cos-brows.mp4"><img src="images/cos-brows.jpg" alt="Brow appointment" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/cos-nails.mp4"><img src="images/cos-nails.jpg" alt="Nail appointment in South Florida" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/cos-makeup.mp4"><img src="images/cos-makeup.jpg" alt="Everyday makeup routine" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
-        <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
-        <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
-        <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
-        <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
       </div>
     </div>
 
@@ -797,16 +778,14 @@
     <div class="cat">
       <div class="cat-bar">Fitness</div>
       <div class="reel">
-        <div class="vcard has-media has-video" data-video="video/fit-healthy-habits.mp4"><img src="images/fit-healthy-habits.jpg" alt="Healthy habits — training and kitchen routine" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
+        <div class="vcard has-media has-video" data-video="video/fit-healthy-habits.mp4"><img src="images/fit-healthy-habits.jpg" alt="Healthy habits, training and kitchen routine" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/fit-hotel-gym.mp4"><img src="images/fit-hotel-gym.jpg" alt="Hotel gym on the road" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/fit-treadmill.mp4"><img src="images/fit-treadmill.jpg" alt="Treadmill session at the gym" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/fit-hamstrings.mp4"><img src="images/fit-hamstrings.jpg" alt="Top three hamstring exercises" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/fit-pilates.mp4"><img src="images/fit-pilates.jpg" alt="Pilates class with weights" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
         <div class="vcard has-media has-video" data-video="video/fit-upper-body.mp4"><img src="images/fit-upper-body.jpg" alt="Upper body dumbbell training" width="505" height="900" loading="lazy" decoding="async"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div></div>
-        <div class="vcard"><div class="badge"><span class="b-gs">GYMSHARK</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
-        <div class="vcard"><div class="badge"><span class="b-dfyne">DFYNE</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
-        <div class="vcard"><div class="badge"><span class="b-teveo">TEVEO</span></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
-        <div class="vcard"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7Z"/></svg></div><div class="vlbl">Add reel</div></div>
+        <div class="vcard has-media"><img src="images/gymshark-jersey.jpg" alt="Gymshark mesh jersey in the gym" width="505" height="900" loading="lazy" decoding="async"></div>
+        <div class="vcard has-media"><img src="images/dfyne-blue-gym.jpg" alt="DFYNE training set in the gym" width="505" height="900" loading="lazy" decoding="async"></div>
       </div>
     </div>
   </div>
@@ -892,7 +871,7 @@
     <div class="dhead">
       <span class="a serif">Client</span> <span class="b">Testimonials</span>
     </div>
-    <p class="dsub">Worked with Mandi? Share how the partnership went — reviewed before it goes live here.</p>
+    <p class="dsub">Worked with Mandi? Share how the partnership went. Reviewed before it goes live here.</p>
 
     <div class="t-empty">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2Zm3 6h10v2H7v-2Zm0-3h10v2H7V7Z"/></svg>
@@ -1028,7 +1007,7 @@
 
     <div class="tst-status" id="tstStatus" role="status" aria-live="polite"></div>
 
-    <p class="inq-note">Nothing is published automatically — every testimonial is reviewed before it appears on the site.</p>
+    <p class="inq-note">Nothing is published automatically. Every testimonial is reviewed before it appears on the site.</p>
   </div>
 </dialog>
 
@@ -1037,7 +1016,7 @@
   <div class="inq">
     <button class="inq-x" type="button" id="inqClose" aria-label="Close">&times;</button>
     <h3 id="inqTitle">Brand partnerships</h3>
-    <p class="intro">Tell me about your brand and what you have in mind — I'll follow up personally.</p>
+    <p class="intro">Tell me about your brand and what you have in mind. I'll follow up personally.</p>
 
     <form id="inqForm" novalidate>
       <div class="field">
@@ -1328,12 +1307,12 @@
       headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
       body: JSON.stringify({
         access_key: KEY,
-        subject: 'Testimonial for Mandi — ' + v.brand,
+        subject: 'Testimonial for Mandi - ' + v.brand,
         from_name: 'Mandi Bagley portfolio',
         'Name': v.name,
         'Email': v.email,
         'Brand': v.brand,
-        'Role': v.role || '—',
+        'Role': v.role || '-',
         'Rating': v.rating + '/5 ' + stars,
         'Testimonial': v.testimonial
       })
