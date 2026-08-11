@@ -203,12 +203,6 @@
   /* ---------- BRAND PHOTO MARQUEE ---------- */
   .mq-sec{background:var(--cream);padding:34px 0 38px;overflow:hidden}
   .mq{position:relative;overflow:hidden}
-  /* soft fade at both edges so items enter and leave rather than snapping */
-  .mq::before,.mq::after{
-    content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none;
-  }
-  .mq::before{left:0;background:linear-gradient(90deg,var(--cream),transparent)}
-  .mq::after{right:0;background:linear-gradient(270deg,var(--cream),transparent)}
   .mq-track{display:flex;gap:18px;width:max-content;animation:mqSlide 46s linear infinite}
   @keyframes mqSlide{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 9px))}}
   .mq:hover .mq-track{animation-play-state:paused}
@@ -232,7 +226,6 @@
   }
   @media(max-width:520px){
     .mq-item{flex:0 0 150px}
-    .mq::before,.mq::after{width:44px}
   }
 
   /* ---------- SECTION HEADINGS ---------- */
