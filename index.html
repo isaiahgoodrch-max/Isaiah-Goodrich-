@@ -1126,6 +1126,22 @@
     copy.setAttribute('aria-hidden', 'true');
     track.appendChild(copy);
   });
+
+  /* loading="lazy" does not fire reliably inside a transform-animated strip:
+     the browser judges visibility from layout position, so items scroll into
+     view without ever being fetched and render as blanks. Once the page has
+     painted, force the whole strip to load. */
+  function fillStrip(){
+    Array.prototype.forEach.call(track.querySelectorAll('img'), function(img){
+      img.loading = 'eager';
+      if(!img.complete) img.src = img.src;   // nudge any the browser skipped
+    });
+  }
+  if('requestIdleCallback' in window){
+    requestIdleCallback(fillStrip, {timeout: 2500});
+  } else {
+    setTimeout(fillStrip, 1200);
+  }
 })();
 
 /* intro overlay */
