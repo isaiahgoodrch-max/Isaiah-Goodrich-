@@ -1055,6 +1055,7 @@
     <p class="intro">Tell me about your brand and what you have in mind. I'll follow up personally.</p>
 
     <form id="inqForm" novalidate>
+      <input type="checkbox" name="botcheck" class="tst-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="field">
         <label for="inqName">Your name <span class="req">*</span></label>
         <input id="inqName" type="text" autocomplete="name">
@@ -1087,13 +1088,9 @@
       </div>
     </form>
 
-    <div class="inq-fallback" id="inqFallback">
-      <strong>Didn't your email app open?</strong> Copy your message and send it to
-      <a href="mailto:bagleyamanda95@gmail.com">bagleyamanda95@gmail.com</a>.
-      <br><button class="inq-copy" type="button" id="inqCopy">Copy message</button>
-    </div>
+    <div class="tst-status" id="inqStatus" role="status" aria-live="polite"></div>
 
-    <p class="inq-note">This opens your email app with the details filled in, addressed to Mandi. You send it from your own account, so her reply lands straight in your inbox.</p>
+    <p class="inq-note">Mandi reads every inquiry and replies personally, usually within a couple of days.</p>
   </div>
 </dialog>
 
@@ -1171,37 +1168,40 @@
   intro.addEventListener('click', function(){ clearTimeout(timer); clear(); });
 })();
 
-/* brand inquiry dialog */
+/* brand inquiry dialog — posted to Web3Forms, which forwards to Mandi's inbox.
+   No mail client involved, so nothing depends on the visitor finishing a
+   hand-off outside the site. */
 (function(){
-  var TO = 'bagleyamanda95@gmail.com';
+  var KEY = '639be1fb-803a-4b7e-8a76-6830ed31399b';
   var dlg      = document.getElementById('inqDialog');
   var triggers = document.querySelectorAll('.inq-open');
   var form     = document.getElementById('inqForm');
-  var fallback = document.getElementById('inqFallback');
-  // The triggers are buttons, so if the dialog can't run there is nothing to
-  // fall back to — wire them straight to mailto so none is ever a dead control.
-  if(!dlg || !triggers.length || !form || typeof dlg.showModal !== 'function'){
-    triggers.forEach(function(t){
-      t.addEventListener('click', function(){ window.location.href = 'mailto:' + TO; });
-    });
-    return;
-  }
+  var status   = document.getElementById('inqStatus');
+  if(!dlg || !triggers.length || !form || typeof dlg.showModal !== 'function') return;
 
   var fields = [
-    {el: document.getElementById('inqName'),  label: 'Name'},
-    {el: document.getElementById('inqEmail'), label: 'Email', email: true},
-    {el: document.getElementById('inqBrand'), label: 'Brand'},
-    {el: document.getElementById('inqBiz'),   label: 'Business'},
-    {el: document.getElementById('inqWhy'),   label: 'Why reaching out'}
+    {el: document.getElementById('inqName'),  key: 'name'},
+    {el: document.getElementById('inqEmail'), key: 'email', email: true},
+    {el: document.getElementById('inqBrand'), key: 'brand'},
+    {el: document.getElementById('inqBiz'),   key: 'business'},
+    {el: document.getElementById('inqWhy'),   key: 'why'}
   ];
-  var lastBody = '';
 
+  function valid(f){
+    var v = f.el.value.trim();
+    if(!v) return false;
+    if(f.email) return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    return true;
+  }
   function markInvalid(f, bad){
-    f.el.closest('.field').classList.toggle('invalid', bad);
+    var w = f.el.closest('.field');
+    if(w) w.classList.toggle('invalid', bad);
+  }
+  function say(msg, ok){
+    status.textContent = msg;
+    status.className = 'tst-status show ' + (ok ? 'ok' : 'bad');
   }
 
-  // showModal() gives focus containment, Escape-to-close, an inert page behind
-  // and ::backdrop for free — no hand-rolled focus trap needed
   triggers.forEach(function(t){
     t.addEventListener('click', function(e){
       e.preventDefault();
@@ -1211,29 +1211,21 @@
   });
   document.getElementById('inqClose').addEventListener('click', function(){ dlg.close(); });
   document.getElementById('inqCancel').addEventListener('click', function(){ dlg.close(); });
-
-  // clicks land on the dialog itself only when they hit the backdrop area
   dlg.addEventListener('click', function(e){ if(e.target === dlg) dlg.close(); });
-
-  dlg.addEventListener('close', function(){
-    document.body.style.overflow = '';
-    fallback.classList.remove('show');
-  });
+  dlg.addEventListener('close', function(){ document.body.style.overflow = ''; });
 
   fields.forEach(function(f){
     f.el.addEventListener('input', function(){
-      if(f.el.closest('.field').classList.contains('invalid')) markInvalid(f, !valid(f));
+      var w = f.el.closest('.field');
+      if(w && w.classList.contains('invalid')) markInvalid(f, !valid(f));
     });
   });
-  function valid(f){
-    var v = f.el.value.trim();
-    if(!v) return false;
-    if(f.email) return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-    return true;
-  }
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
+    var hp = form.querySelector('.tst-hp');
+    if(hp && hp.checked) return;
+
     var firstBad = null;
     fields.forEach(function(f){
       var ok = valid(f);
@@ -1242,38 +1234,42 @@
     });
     if(firstBad){ firstBad.focus(); return; }
 
-    var v = fields.map(function(f){ return f.el.value.trim(); });
-    var subject = 'Brand partnership inquiry - ' + v[2];
-    lastBody =
-      'Name: '     + v[0] + '\n' +
-      'Email: '    + v[1] + '\n' +
-      'Brand: '    + v[2] + '\n' +
-      'Business: ' + v[3] + '\n\n' +
-      'Why reaching out:\n' + v[4] + '\n';
+    var btn = form.querySelector('.inq-send');
+    var label = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Sending…';
+    status.className = 'tst-status';
 
-    window.location.href = 'mailto:' + TO +
-      '?subject=' + encodeURIComponent(subject) +
-      '&body='    + encodeURIComponent(lastBody);
+    var v = {};
+    fields.forEach(function(f){ v[f.key] = f.el.value.trim(); });
 
-    // mailto silently does nothing when no mail client is registered, so always
-    // surface the copy fallback rather than assuming it worked
-    setTimeout(function(){ fallback.classList.add('show'); }, 700);
-  });
-
-  document.getElementById('inqCopy').addEventListener('click', function(){
-    var btn = this;
-    var text = 'To: ' + TO + '\n\n' + lastBody;
-    function done(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy message'; }, 2000); }
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(done, fallbackCopy);
-    } else { fallbackCopy(); }
-    function fallbackCopy(){
-      var ta = document.createElement('textarea');
-      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-      document.body.appendChild(ta); ta.select();
-      try{ document.execCommand('copy'); done(); }catch(err){ btn.textContent = 'Press Cmd+C'; }
-      document.body.removeChild(ta);
-    }
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify({
+        access_key: KEY,
+        subject: 'Brand partnership inquiry - ' + v.brand,
+        from_name: 'Mandi Bagley portfolio',
+        'Name': v.name,
+        'Email': v.email,
+        'Brand': v.brand,
+        'Business': v.business,
+        'Why reaching out': v.why
+      })
+    })
+    .then(function(r){ return r.json().catch(function(){ throw new Error('bad response'); }); })
+    .then(function(d){
+      if(!d || !d.success) throw new Error('send failed');
+      form.style.display = 'none';
+      status.className = 'tst-status';
+      var done = document.createElement('div');
+      done.className = 'tst-done';
+      done.innerHTML = '<h4>Thank you</h4><p>Your inquiry has been sent to Mandi. She will be in touch shortly.</p>';
+      form.parentNode.insertBefore(done, form.nextSibling);
+    })
+    .catch(function(){
+      btn.disabled = false; btn.textContent = label;
+      say('Something went wrong sending that. Please try again in a moment.', false);
+    });
   });
 })();
 </script>
