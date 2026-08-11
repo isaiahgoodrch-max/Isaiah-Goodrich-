@@ -104,14 +104,17 @@
   .contact-line svg{width:17px;height:17px;fill:var(--brown-2);flex:none}
   .contact-line a{color:var(--pink-deep);text-decoration:none;font-weight:600}
   .contact-line a:hover{text-decoration:underline}
-  .mediakit{font-size:14px;color:var(--muted);margin-top:14px;line-height:1.5}
+  .mediakit{font-size:15px;color:var(--muted);margin-top:16px;line-height:1.55}
   .mediakit a{color:var(--pink-deep);font-weight:700;text-decoration:underline}
   /* a button, not a mailto link — an href="mailto:" makes the browser show its
      "Open Mail?" handler prompt before the dialog can open */
   .mediakit button{
-    font-family:inherit;font-size:inherit;line-height:inherit;
-    color:var(--pink-deep);font-weight:700;text-decoration:underline;
-    background:none;border:0;padding:0;cursor:pointer;
+    font-family:inherit;line-height:inherit;
+    font-size:18px;font-weight:800;letter-spacing:.2px;
+    color:var(--pink-deep);text-decoration:underline;text-underline-offset:3px;
+    text-decoration-thickness:2px;
+    background:none;border:0;padding:0 0 0 2px;cursor:pointer;
+    transition:color .18s;
   }
   .mediakit button:hover{color:#9d3d5b}
   .mediakit button:focus-visible{outline:2px solid var(--pink-deep);outline-offset:3px;border-radius:2px}
@@ -203,9 +206,8 @@
   /* ---------- BRAND PHOTO MARQUEE ---------- */
   .mq-sec{background:var(--cream);padding:34px 0 38px;overflow:hidden}
   .mq{position:relative;overflow:hidden}
-  .mq-track{display:flex;gap:18px;width:max-content;animation:mqSlide 46s linear infinite}
+  .mq-track{display:flex;gap:18px;width:max-content;animation:mqSlide 55s linear infinite}
   @keyframes mqSlide{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 9px))}}
-  .mq:hover .mq-track{animation-play-state:paused}
   .mq-item{
     flex:0 0 200px;aspect-ratio:4/5;border-radius:14px;overflow:hidden;position:relative;
     background:linear-gradient(160deg,#f7e8eb,#ecd5db);box-shadow:0 8px 20px rgba(60,48,38,.13);
